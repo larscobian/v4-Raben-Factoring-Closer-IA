@@ -1,0 +1,7 @@
+{
+  "name": "v4 Raben Factoring Closer AI - Liquid Glass",
+  "description": "An AI-powered sales training and execution tool for Raben Factoring, utilizing Gemini 2.5 Live API for voice simulations and email generation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

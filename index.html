@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>Raben Factoring Closer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        /* Glass Refraction Variables - ULTRA TRANSPARENT & SUBTLE */
+        --gr-blur: 40px;
+        --gr-blur-card: 25px;
+        --gr-blur-pill: 12px;
+
+        --gr-saturation: 1.6;
+        --gr-saturation-card: 1.4;
+        --gr-saturation-pill: 1.2;
+
+        --gr-radius: 32px;
+        --gr-radius-card: 20px;
+        --gr-radius-pill: 9999px;
+
+        /* Ultra transparent glass base - even lighter for subtle reflections */
+        --gr-bg-start: rgba(255, 255, 255, 0.12);
+        --gr-bg-end: rgba(255, 255, 255, 0.03);
+
+        /* Vibrant but soft Chromatic Dispersion */
+        --gr-chromatic-blue: rgba(0, 200, 255, 0.12);
+        --gr-chromatic-violet: rgba(180, 100, 255, 0.12);
+        --gr-chromatic-pink: rgba(255, 80, 220, 0.12);
+        --gr-chromatic-green: rgba(80, 255, 150, 0.1);
+
+        /* Slow, Elegant Animation Durations */
+        --gr-shimmer-duration: 18s;
+        --gr-specular-duration: 12s;
+      }
+
+      body {
+        font-family: 'Public Sans', sans-serif;
+        background-color: #334155; /* Lighter slate base */
+        color: #f8fafc;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Brighter & More Vibrant Animated Mesh Gradient Background */
+      .ambient-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background: 
+          radial-gradient(at 10% 10%, hsla(280, 100%, 75%, 1) 0px, transparent 50%),
+          radial-gradient(at 90% 15%, hsla(340, 100%, 75%, 1) 0px, transparent 50%),
+          radial-gradient(at 15% 85%, hsla(200, 100%, 75%, 1) 0px, transparent 50%),
+          radial-gradient(at 85% 85%, hsla(45, 100%, 75%, 1) 0px, transparent 50%),
+          radial-gradient(at 50% 50%, hsla(160, 100%, 75%, 1) 0px, transparent 55%),
+          linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+        background-size: 150% 150%;
+        animation: gradient-move 20s ease-in-out infinite alternate;
+      }
+
+      @keyframes gradient-move {
+        0% { background-position: 0% 0%; }
+        100% { background-position: 100% 100%; }
+      }
+
+      /* ── Glass CSS Implementation ── */
+      @keyframes glass-shimmer {
+        0%   { background-position: -200% 0, 0 0; }
+        100% { background-position:  200% 0, 0 0; }
+      }
+
+      @keyframes specular-breathe {
+        0%, 100% { opacity: 0.2; }
+        50%      { opacity: 0.5; }
+      }
+
+      /* Tier 1: Main Glass (Layout Containers) */
+      .glass {
+        position: relative;
+        isolation: isolate;
+        border-radius: var(--gr-radius);
+        background:
+          linear-gradient(125deg, transparent 40%, rgba(255,255,255,0.15) 45%, transparent 50%),
+          linear-gradient(180deg, var(--gr-bg-start), var(--gr-bg-end));
+        background-size: 200% 100%, 100% 100%;
+        animation: glass-shimmer var(--gr-shimmer-duration) ease-in-out infinite;
+        
+        backdrop-filter: blur(var(--gr-blur)) saturate(var(--gr-saturation));
+        -webkit-backdrop-filter: blur(var(--gr-blur)) saturate(var(--gr-saturation));
+        
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.3),
+          inset 0 1px 0 rgba(255,255,255,0.4),
+          0 25px 50px -12px rgba(0,0,0,0.3);
+      }
+
+      /* Specular Highlight - Softer breathing */
+      .glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 40%),
+          linear-gradient(90deg, transparent 15%, rgba(255,255,255,0.4) 50%, transparent 85%);
+        background-size: 100% 100%, 100% 1px;
+        background-position: 0 0, 0 0;
+        background-repeat: no-repeat;
+        animation: specular-breathe var(--gr-specular-duration) ease-in-out infinite;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* Chromatic Dispersion (Rainbow Edges) - Subtle */
+      .glass::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background:
+          radial-gradient(ellipse 60% 50% at 10% 50%, var(--gr-chromatic-blue) 0%, transparent 70%),
+          radial-gradient(ellipse 50% 60% at 50% 10%, var(--gr-chromatic-violet) 0%, transparent 70%),
+          radial-gradient(ellipse 60% 50% at 90% 50%, var(--gr-chromatic-pink) 0%, transparent 70%),
+          radial-gradient(ellipse 50% 60% at 50% 90%, var(--gr-chromatic-green) 0%, transparent 70%);
+        box-shadow:
+          inset  1.2px  0 0 0 rgba(255,255,255,0.1),
+          inset -1.2px  0 0 0 rgba(255,255,255,0.1),
+          inset  0  1.2px 0 0 rgba(255,255,255,0.1),
+          inset  0 -1.2px 0 0 rgba(255,255,255,0.1);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      /* Tier 2: Glass Card */
+      .glass-card {
+        position: relative;
+        isolation: isolate;
+        border-radius: var(--gr-radius-card);
+        background: linear-gradient(160deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+        backdrop-filter: blur(var(--gr-blur-card)) saturate(var(--gr-saturation-card));
+        -webkit-backdrop-filter: blur(var(--gr-blur-card)) saturate(var(--gr-saturation-card));
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.2),
+          inset 0 1px 0 rgba(255,255,255,0.2),
+          0 8px 32px -4px rgba(0,0,0,0.2);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+      }
+
+      .glass-card:hover {
+        background: linear-gradient(160deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 100%);
+        transform: translateY(-2px) scale(1.005);
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.4),
+          inset 0 1px 0 rgba(255,255,255,0.3),
+          0 15px 35px -8px rgba(0,0,0,0.25);
+      }
+
+      /* Tier 3: Glass Pill */
+      .glass-pill {
+        border-radius: var(--gr-radius-pill);
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(var(--gr-blur-pill)) saturate(var(--gr-saturation-pill));
+        -webkit-backdrop-filter: blur(var(--gr-blur-pill)) saturate(var(--gr-saturation-pill));
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.25),
+          inset 0 1px 0 rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+      }
+      .glass-pill:focus-within, .glass-pill:hover {
+        background: rgba(255,255,255,0.2);
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.4),
+          inset 0 1px 0 rgba(255,255,255,0.3);
+      }
+
+      /* Text Colors - Pure white for adjustments */
+      .text-glass-primary {
+        color: #ffffff;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      }
+      .text-glass-secondary {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
+    "glass-refraction": "https://esm.sh/glass-refraction@^0.1.0",
+    "tsup": "https://esm.sh/tsup@^8.5.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <!-- SVG Refraction Filters -->
+    <svg class="absolute w-0 h-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="glass-refract" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="preblur"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.005" numOctaves="3" seed="123" result="noise"/>
+          <feGaussianBlur in="noise" stdDeviation="6" result="smooth"/>
+          <feDisplacementMap in="preblur" in2="smooth" scale="10" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+          <feColorMatrix in="displaced" type="saturate" values="1.4"/>
+        </filter>
+      </defs>
+    </svg>
+    
+    <div class="ambient-bg"></div>
+    <div id="root"></div>
+  </body>
+</html>
